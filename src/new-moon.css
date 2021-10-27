@@ -69,6 +69,10 @@ pre.language-text {
     background: transparent;
 }
 
+pre.language-text.line-numbers {
+    padding-left: 1.5rem !important;
+}
+
 /* Hide line numbers */
 
 pre.language-terminal,
@@ -273,6 +277,7 @@ pre.language-terminal::before {
 .token.bold {
     font-weight: bold;
 }
+
 .token.italic {
     font-style: italic;
 }
