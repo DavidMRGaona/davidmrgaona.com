@@ -15,7 +15,7 @@ const mainNavItems = [
 
 const socialNavItems = [
   {url: 'https://github.com/davidmrgaona', icon: github, label: 'GitHub'},
-  {url: 'https://twitter.com/sqmbra', icon: twitter, label: 'Twitter'},
+  {url: 'https://twitter.com/davidmrgaona', icon: twitter, label: 'Twitter'},
 ]
 
 export const Nav = () => {

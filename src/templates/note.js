@@ -6,32 +6,48 @@ import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
 import config from '../utils/config'
 
-export default function NoteTemplate ({data}) {
+export default function NoteTemplate({ data }) {
   const post = data.markdownRemark
-  const {title, slug, date} = post.frontmatter
+  const { title, slug, date } = post.frontmatter
 
   return (
     <>
-      <Helmet title={`${title} | ${config.siteTitle}`}/>
-      <SEO/>
+      <Helmet title={`${title} | ${config.siteTitle}`} />
+      <SEO />
 
       <article id={slug}>
         <header>
-          <div className="container" style={{paddingBottom: 0}}>
+          <div className="container" style={{ paddingBottom: 0 }}>
             <p>
               <Link to="/notes">Back to Notes</Link>
             </p>
             <h1>{title}</h1>
             <p>
-              <time>{date}</time>
+              <div className="post-details">
+                Written by <Link to="/me">David M. Ramos Gaona</Link> on{' '}
+                <time>{date}</time>
+              </div>
             </p>
           </div>
         </header>
 
         <section
           className="container"
-          dangerouslySetInnerHTML={{__html: post.html}}
+          dangerouslySetInnerHTML={{ __html: post.html }}
         />
+
+        <section>
+          <div className="container">
+            <div className="divider" />
+            <p>
+              Comments? Feel free to{' '}
+              <a href="mailto:hello[at]davidmrgaona[dot]com">email me</a>.
+            </p>
+            <p>
+              <Link to="/notes">Back to Notes</Link>
+            </p>
+          </div>
+        </section>
       </article>
     </>
   )

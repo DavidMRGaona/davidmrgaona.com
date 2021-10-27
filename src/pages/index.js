@@ -90,8 +90,16 @@ export default function WebsiteIndex ({data}) {
               not looking).
             </li>
             <li>
-              <strong>Other stuff</strong>
+              <strong>Links</strong>
               <ul>
+                <li>
+                  <a href="https://github.com/davidmrgaona">GitHub</a> - Open
+                  source projects
+                </li>
+                <li>
+                  <a href="https://twitter.com/davidmrgaona">Twitter</a> - Random
+                  thoughts
+                </li>
                 <li>
                   <Link to="/rss.xml">RSS feed</Link>
                 </li>
