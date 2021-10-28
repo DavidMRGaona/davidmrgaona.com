@@ -1,6 +1,7 @@
+const {resolveSiteUrl} = require('gatsby-plugin-sitemap/internals')
 module.exports = {
   siteMetadata: {
-    title: 'David M. Ramos Gaona',
+    title: 'David M. Ramos Gaona\'s personal website ',
     description: 'This is my little space.',
     author: {
       name: 'David M. Ramos Gaona'
@@ -9,13 +10,63 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-postcss',
+    'gatsby-plugin-netlify-cms',
 
     // ===================================================================================
     // Meta
     // ===================================================================================
-    'gatsby-plugin-netlify-cms',
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sitemap',
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+               siteUrl
+            }
+          }
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+          allMarkdownRemark {
+            edges {
+              node {
+                fields {
+                  slug
+                }
+              }
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: () => `https://davidmrgaona.com`,
+        resolvePages: ({
+                         allSitePage: { nodes: allPages },
+                         allMarkdownRemark: { edges: allMarkdownRemarkNodes }
+                       }) => {
+          return allPages.map(page => {
+            const pages = allMarkdownRemarkNodes.map(edge => {
+              return {
+                url: `${resolveSiteUrl}/${edge.node.fields.slug}`,
+                changefreq: `daily`,
+                priority: 0.7,
+              }
+            })
+
+            return { ...page, ...pages }
+          })
+        },
+        serialize: ({ path, modifiedGmt }) => {
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+          }
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -160,10 +211,10 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: "gatsby-remark-external-links",
+            resolve: 'gatsby-remark-external-links',
             options: {
-              target: "_blank",
-              rel: "nofollow"
+              target: '_blank',
+              rel: 'nofollow'
             }
           }
         ]
