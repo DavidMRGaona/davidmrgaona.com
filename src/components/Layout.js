@@ -64,7 +64,9 @@ export const Layout = ({children}) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet htmlAttributes={{
+        lang: 'en'
+      }}>
         <link rel="shortcut icon" type="image/png" href={favicon}/>
       </Helmet>
 
