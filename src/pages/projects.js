@@ -9,14 +9,11 @@ import github from '../assets/nav-github.png'
 
 const projectsList = [
   {
-    name: '',
-    slug: '',
-    tagline: '',
-    image: '',
-    url: '',
-    writeup: '',
-    description: ``,
-  },
+    name: 'davidmrgaona.com',
+    slug: 'davidmrgaona.com',
+    tagline: 'The source of this website.',
+    url: 'https://davidmrgaona.com'
+  }
 ]
 
 export default function ProjectsIndex () {
