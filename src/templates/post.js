@@ -74,16 +74,16 @@ export const pageQuery = graphql`
             fields {
                 slug
             }
-            frontmatter {
+            frontmatter  {
                 title
                 date(formatString: "MMMM DD, YYYY")
                 tags
                 description
-                thumbnail {
-                    childImageSharp {
-                        gatsbyImageData(width: 150, height: 150)
-                    }
-                }
+#                thumbnail {
+#                    childImageSharp {
+#                        gatsbyImageData(width: 150, height: 150)
+#                    }
+#                }
             }
         }
     }
