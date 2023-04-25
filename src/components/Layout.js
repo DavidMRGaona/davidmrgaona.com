@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from '@reach/router'
-import Helmet from 'react-helmet'
 
 import favicon from '../assets/nav-floppy.png'
 import { Nav } from './Nav'
@@ -12,19 +11,19 @@ import '../style.css'
 import '../new-moon.css'
 import '../light-theme.css'
 
-function setDarkTheme (setTheme) {
+function setDarkTheme(setTheme) {
   localStorage.setItem('theme', 'dark')
   setTheme('dark')
   document.body.style.backgroundColor = '#272727'
 }
 
-function setLightTheme (setTheme) {
+function setLightTheme(setTheme) {
   localStorage.setItem('theme', 'light')
   setTheme('light')
   document.body.style.backgroundColor = 'white'
 }
 
-function getMainClass (theme, collapsed, slug) {
+function getMainClass(theme, collapsed, slug) {
   let classString = 'theme'
   classString += ` ${theme}`
 
@@ -39,7 +38,7 @@ function getMainClass (theme, collapsed, slug) {
   return classString
 }
 
-export const Layout = ({children}) => {
+export const Layout = ({ children }) => {
   const location = useLocation()
   const [theme, setTheme] = useState('dark')
   const [collapsed, setCollapsed] = useState(false)
@@ -63,24 +62,27 @@ export const Layout = ({children}) => {
   }, [])
 
   return (
-    <>
-      <Helmet htmlAttributes={{
-        lang: 'en'
-      }}>
-        <link rel="shortcut icon" type="image/png" href={favicon}/>
-      </Helmet>
+    <div className={getMainClass(theme, collapsed, slug)}>
+      <Nav />
+      {!(slug.includes('/notes') || slug.includes('/resume')) && <Sidebar />}
+      <FileHeader
+        setCollapsed={setCollapsed}
+        onUpdateTheme={() => onUpdateTheme(theme)}
+        theme={theme}
+      />
+      <main>{children}</main>
+      <Footer />
+    </div>
+  )
+}
 
-      <div className={getMainClass(theme, collapsed, slug)}>
-        <Nav/>
-        {!(slug.includes('/notes') || slug.includes('/resume')) && <Sidebar/>}
-        <FileHeader
-          setCollapsed={setCollapsed}
-          onUpdateTheme={() => onUpdateTheme(theme)}
-          theme={theme}
-        />
-        <main>{children}</main>
-        <Footer/>
-      </div>
+export default Layout
+
+export const Head = () => {
+  return (
+    <>
+      <html lang='en' />
+      <link rel='shortcut icon' type='image/png' href={favicon} />
     </>
   )
 }

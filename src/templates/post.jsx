@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { graphql, Link } from 'gatsby'
-import Helmet from 'react-helmet'
 
 import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
@@ -8,7 +7,7 @@ import { Comments } from '../components/Comments'
 import config from '../utils/config'
 import { appendComments, slugify } from '../utils/helpers'
 
-export default function PostTemplate ({data}) {
+const PostTemplate = ({data}) => {
   const post = data.markdownRemark
   const {tags, title, description, date} = post.frontmatter
   const commentBox = React.createRef()
@@ -19,9 +18,6 @@ export default function PostTemplate ({data}) {
 
   return (
     <>
-      <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`}/>
-      <SEO postPath={post.fields.slug} postNode={post} postSEO/>
-
       <article>
         <header>
           <div className="container">
@@ -65,6 +61,20 @@ export default function PostTemplate ({data}) {
 }
 
 PostTemplate.Layout = Layout
+
+export default PostTemplate
+
+export const Head = ({ data }) => {
+  const post = data.markdownRemark
+  return (
+    <SEO
+      title={`${post.frontmatter.title} | ${config.siteTitle}`}
+      postPath={post.fields.slug}
+      postNode={post}
+      postSEO
+    />
+  )
+}
 
 export const pageQuery = graphql`
     query BlogPostBySlug($slug: String!) {

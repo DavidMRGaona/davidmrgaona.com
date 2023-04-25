@@ -1,27 +1,25 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 
 import config from '../utils/config'
+import { useSiteMetadata } from '../utils/hooks/use-site-metadata'
 
-export const SEO = ({postNode, postPath, postSEO, customDescription}) => {
-  let title
-  let description
+export const SEO = ({ title, description, pathname, children, postNode, postPath, postSEO, customDescription }) => {
+  let { title: defaultTitle, description: defaultDescription, siteUrl } = useSiteMetadata()
   let image = config.siteLogo
-  let postURL
 
   if (postSEO) {
     const postMeta = postNode.frontmatter
-    title = postMeta.title
-    description = postNode.excerpt
+    title = postMeta.title || defaultTitle
+    description = postNode.excerpt || defaultDescription
 
     if (postMeta.thumbnail) {
       image = postMeta.thumbnail.childImageSharp.gatsbyImageData.src
     }
 
-    postURL = `${config.siteUrl}${postPath}`
+    siteUrl = `${config.siteUrl}${postPath}` || siteUrl
   } else {
-    title = config.siteTitle
-    description = customDescription || config.description
+    title = config.siteTitle || defaultTitle
+    description = description || defaultDescription
   }
 
   image = `${config.siteUrl}${image}`
@@ -29,7 +27,7 @@ export const SEO = ({postNode, postPath, postSEO, customDescription}) => {
     {
       '@context': 'http://schema.org',
       '@type': 'WebSite',
-      url: config.siteUrl,
+      url: config.siteUrl || siteUrl,
       name: title,
       alternateName: title,
     },
@@ -45,7 +43,7 @@ export const SEO = ({postNode, postPath, postSEO, customDescription}) => {
             '@type': 'ListItem',
             position: 1,
             item: {
-              '@id': postURL,
+              '@id': siteUrl,
               name: title,
               image,
             },
@@ -68,7 +66,8 @@ export const SEO = ({postNode, postPath, postSEO, customDescription}) => {
     )
   }
   return (
-    <Helmet>
+    <>
+      <title>{title}</title>
       <meta name="description" content={description}/>
       <meta name="image" content={image}/>
 
@@ -76,7 +75,7 @@ export const SEO = ({postNode, postPath, postSEO, customDescription}) => {
         {JSON.stringify(schemaOrgJSONLD)}
       </script>
 
-      <meta property="og:url" content={postSEO ? postURL : config.siteUrl}/>
+      <meta property="og:url" content={postSEO ? siteUrl : config.siteUrl}/>
       {postSEO && <meta property="og:type" content="article"/>}
       <meta property="og:title" content={title}/>
       <meta property="og:description" content={description}/>
@@ -86,6 +85,6 @@ export const SEO = ({postNode, postPath, postSEO, customDescription}) => {
       <meta name="twitter:title" content={title}/>
       <meta name="twitter:description" content={description}/>
       <meta name="twitter:image" content={image}/>
-    </Helmet>
+    </>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
-import Helmet from 'react-helmet'
 
 import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
@@ -8,44 +7,55 @@ import { Posts } from '../components/Posts'
 import { getSimplifiedPosts } from '../utils/helpers'
 import config from '../utils/config'
 
-export default function CategoryTemplate ({data, pageContext}) {
-  let {category} = pageContext
-  const {totalCount} = data.allMarkdownRemark
+const TagTemplate = ({ data, pageContext }) => {
+  const { tag } = pageContext
+  const { totalCount } = data.allMarkdownRemark
   const posts = data.allMarkdownRemark.edges
   const simplifiedPosts = useMemo(() => getSimplifiedPosts(posts), [posts])
   const message = totalCount === 1 ? ' post found.' : ' posts found.'
 
   return (
     <>
-      <Helmet title={`${category} | ${config.siteTitle}`}/>
-      <SEO/>
-
       <article>
         <header>
-          <div className="container">
-            <h1>{category}</h1>
-            <p className="description">
-              <span className="count">{totalCount}</span>
+          <div className='container'>
+            <h1>
+              <span className='deemphasized'>Posts tagged:</span>{' '}
+              <span className='primary-underline'>{tag}</span>
+            </h1>
+            <p className='description'>
+              <span className='count'>{totalCount}</span>
               {message}
             </p>
           </div>
         </header>
 
-        <section className="container">
-          <Posts data={simplifiedPosts}/>
+        <section className='container'>
+          <Posts data={simplifiedPosts} />
         </section>
       </article>
     </>
   )
 }
 
-CategoryTemplate.Layout = Layout
+TagTemplate.Layout = Layout
+
+export default TagTemplate
+
+export const Head = ({ pageContext }) => {
+  const { tag } = pageContext
+  return (
+    <SEO
+      title={`Posts tagged: ${tag} | ${config.siteTitle}`}
+    />
+  )
+}
 
 export const pageQuery = graphql`
-    query CategoryPage($category: String) {
+    query TagPage($tag: String) {
         allMarkdownRemark(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            filter: { frontmatter: { categories: { in: [$category] } } }
+            sort: {frontmatter: {date: DESC}}
+            filter: {frontmatter: {tags: {in: [$tag]}}}
         ) {
             totalCount
             edges {
@@ -55,9 +65,8 @@ export const pageQuery = graphql`
                         slug
                     }
                     frontmatter {
-                        title
                         date(formatString: "MMMM DD, YYYY")
-                        description
+                        title
                         tags
                         categories
                     }

@@ -1,22 +1,20 @@
-const {resolveSiteUrl} = require('gatsby-plugin-sitemap/internals')
+const { resolveSiteUrl } = require('gatsby-plugin-sitemap/internals')
 module.exports = {
   siteMetadata: {
     title: 'David M. Ramos Gaona\'s personal website ',
     description: 'This is my little space.',
     author: {
-      name: 'David M. Ramos Gaona'
+      name: 'David M. Ramos Gaona',
     },
     siteUrl: 'https://www.davidmrgaona.com',
   },
   plugins: [
     'gatsby-plugin-postcss',
-
     // ===================================================================================
     // Meta
     // ===================================================================================
-    'gatsby-plugin-react-helmet',
     {
-      resolve: "gatsby-plugin-sitemap",
+      resolve: 'gatsby-plugin-sitemap',
       options: {
         query: `
         {
@@ -44,7 +42,7 @@ module.exports = {
         resolveSiteUrl: () => `https://davidmrgaona.com`,
         resolvePages: ({
                          allSitePage: { nodes: allPages },
-                         allMarkdownRemark: { edges: allMarkdownRemarkNodes }
+                         allMarkdownRemark: { edges: allMarkdownRemarkNodes },
                        }) => {
           return allPages.map(page => {
             const pages = allMarkdownRemarkNodes.map(edge => {
@@ -97,7 +95,7 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({query: {site, allMarkdownRemark}}) => {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
@@ -105,36 +103,34 @@ module.exports = {
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   custom_elements: [
-                    {'content:encoded': edge.node.html},
-                    {author: 'hello@davidmrgaona.com'},
+                    { 'content:encoded': edge.node.html },
+                    { author: 'hello@davidmrgaona.com' },
                   ],
                 })
               })
             },
-            query: `
-              {
-                allMarkdownRemark(
-                  limit: 30,
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                  filter: { frontmatter: { template: { eq: "post" } } }
-                ) {
-                  edges {
-                    node {
-                      excerpt
-                      html
-                      fields { 
-                        slug 
-                      }
-                      frontmatter {
-                        title
-                        date
-                        template
-                      }
+            query: `{
+              allMarkdownRemark(
+                limit: 30
+                sort: {frontmatter: {date: DESC}}
+                filter: {frontmatter: {template: {eq: "post"}}}
+              ) {
+                edges {
+                  node {
+                    excerpt
+                    html
+                    fields {
+                      slug
+                    }
+                    frontmatter {
+                      title
+                      date
+                      template
                     }
                   }
                 }
               }
-            `,
+            }`,
             output: '/rss.xml',
             title: 'David M. Ramos Gaona | RSS Feed',
           },
@@ -145,7 +141,6 @@ module.exports = {
     // ===================================================================================
     // Images and static
     // ===================================================================================
-
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
@@ -161,6 +156,13 @@ module.exports = {
       options: {
         name: 'pages',
         path: `${__dirname}/content/pages/`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'notes',
+        path: `${__dirname}/content/notes/`,
       },
     },
     {
@@ -213,11 +215,11 @@ module.exports = {
             resolve: 'gatsby-remark-external-links',
             options: {
               target: '_blank',
-              rel: 'nofollow'
-            }
-          }
-        ]
-      }
+              rel: 'nofollow',
+            },
+          },
+        ],
+      },
     },
 
     // ===================================================================================
@@ -253,7 +255,7 @@ module.exports = {
         ref: 'id',
         index: ['title', 'tags'],
         store: ['id', 'slug', 'title', 'tags', 'date'],
-        normalizer: ({data}) =>
+        normalizer: ({ data }) =>
           data.allMarkdownRemark.nodes.map((node) => ({
             id: node.id,
             slug: `/${node.frontmatter.slug}`,

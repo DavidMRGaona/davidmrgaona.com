@@ -1,35 +1,33 @@
 const path = require('path')
 
-const createPages = async ({graphql, actions}) => {
-  const {createPage} = actions
+const createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
 
-  const blogPage = path.resolve('./src/templates/post.js')
-  const notePage = path.resolve('./src/templates/note.js')
-  const pagePage = path.resolve('./src/templates/page.js')
-  const tagPage = path.resolve('./src/templates/tag.js')
-  const categoryPage = path.resolve('./src/templates/category.js')
+  const blogPage = path.resolve('./src/templates/post.jsx')
+  const notePage = path.resolve('./src/templates/note.jsx')
+  const pagePage = path.resolve('./src/templates/page.jsx')
+  const tagPage = path.resolve('./src/templates/tag.jsx')
+  const categoryPage = path.resolve('./src/templates/category.jsx')
 
   const result = await graphql(
-    `
-      {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-          edges {
-            node {
-              id
-              frontmatter {
-                title
-                tags
-                categories
-                template
+      `{
+          allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+              edges {
+                  node {
+                      id
+                      frontmatter {
+                          title
+                          tags
+                          categories
+                          template
+                      }
+                      fields {
+                          slug
+                      }
+                  }
               }
-              fields {
-                slug
-              }
-            }
           }
-        }
-      }
-    `
+      }`,
   )
 
   if (result.errors) {
@@ -133,8 +131,8 @@ const createPages = async ({graphql, actions}) => {
   })
 }
 
-const createNode = ({node, actions, getNode}) => {
-  const {createNodeField} = actions
+const createNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
 
   // =====================================================================================
   // Slugs
@@ -163,14 +161,12 @@ exports.createPages = createPages
 exports.onCreateNode = createNode
 
 // Helpers
-function slugify (str) {
-  return (
-    str &&
+function slugify(str) {
+  return str &&
     str
       .match(
-        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
       )
       .map((x) => x.toLowerCase())
       .join('-')
-  )
 }
