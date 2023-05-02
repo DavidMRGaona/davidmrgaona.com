@@ -34,6 +34,7 @@ export function slugify (string) {
 }
 
 export function appendComments (commentBox) {
+
   const commentScript = document.createElement('script')
   const theme =
     localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'
