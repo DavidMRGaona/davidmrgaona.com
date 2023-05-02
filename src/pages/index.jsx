@@ -9,6 +9,15 @@ import config from '../utils/config'
 
 import github from '../assets/nav-github.png'
 
+const madeWithLinks = [
+  { url: '/', label: 'Home', description: 'Home' },
+  { url: '/blog', label: 'Articles', description: 'Tutorials, technical articles, snippets, and reference materials' },
+  { url: '/notes', label: 'Notes', description: 'Anything else I want to write.' },
+  { url: '/projects', label: 'Projects', description: 'A few highlights of my open-source projects.' },
+  { url: '/me', label: 'About me', description: 'A little about me and links to talks, interviews, etc.' },
+  // {url: '/resume', label: 'Resume', description: 'My professional experience.'},
+]
+
 const WebsiteIndex = ({ data }) => {
   const [followers, setFollowers] = useState(0)
   const latest = data.latest.edges
@@ -60,28 +69,11 @@ const WebsiteIndex = ({ data }) => {
         <h2>Sitemap</h2>
 
         <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/blog'>Articles</Link> - Tutorials, technical articles,
-            snippets, and reference materials.
-          </li>
-          <li>
-            <Link to='/notes'>Notes</Link> - Anything else I want to write.
-          </li>
-          <li>
-            <Link to='/projects'>Projects</Link> - A few highlights of my
-            open-source projects.
-          </li>
-          <li>
-            <Link to='/me'>About me</Link> - A little about me and links to
-            talks, interviews, etc.
-          </li>
-          <li>
-            <Link to='/resume'>Resume</Link> - My professional experience (I'm
-            not looking).
-          </li>
+          {madeWithLinks.map((link) => (
+            <li key={link.url}>
+              <Link to={link.url}>{link.label}</Link> - {link.description}
+            </li>
+          ))}
           <li>
             <strong>Links</strong>
             <ul>
@@ -94,7 +86,14 @@ const WebsiteIndex = ({ data }) => {
                 thoughts
               </li>
               <li>
-                <Link to='/rss.xml'>RSS feed</Link>
+                <a
+                  href='/rss.xml'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  key='/rss.xml'
+                >
+                  RSS feed
+                </a>
               </li>
             </ul>
           </li>
