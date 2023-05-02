@@ -31,9 +31,14 @@ export const Footer = () => {
             </a>
           ))}
           {internalLinks.map((link) => (
-            <Link to={link.url} key={link.url}>
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={link.url}
+            >
               {link.label}
-            </Link>
+            </a>
           ))}
         </nav>
         <nav>
