@@ -84,6 +84,9 @@ export default Layout
 
 export const Head = () => {
   return (
-    <link rel='shortcut icon' type='image/png' href={favicon} />
+    <>
+      <html lang="en" />
+      <link rel='shortcut icon' type='image/png' href={favicon} />
+    </>
   )
 }
