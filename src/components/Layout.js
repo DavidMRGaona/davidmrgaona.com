@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from '@reach/router'
 
+import useIsClient from '../utils/hooks/use-is-client'
 import favicon from '../assets/nav-floppy.png'
 import { Nav } from './Nav'
 import { Sidebar } from './Sidebar'
@@ -43,6 +44,7 @@ export const Layout = ({ children }) => {
   const [theme, setTheme] = useState('dark')
   const [collapsed, setCollapsed] = useState(false)
   const slug = location.pathname
+  const isClient = useIsClient();
 
   const onUpdateTheme = (theme) => {
     theme === 'dark' ? setLightTheme(setTheme) : setDarkTheme(setTheme)
@@ -60,6 +62,8 @@ export const Layout = ({ children }) => {
       savedTheme === 'dark' ? setDarkTheme(setTheme) : setLightTheme(setTheme)
     }
   }, [])
+
+  if ( !isClient ) return null;
 
   return (
     <div className={getMainClass(theme, collapsed, slug)}>
@@ -80,9 +84,6 @@ export default Layout
 
 export const Head = () => {
   return (
-    <>
-      <html lang='en' />
-      <link rel='shortcut icon' type='image/png' href={favicon} />
-    </>
+    <link rel='shortcut icon' type='image/png' href={favicon} />
   )
 }

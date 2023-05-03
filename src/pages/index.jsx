@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout'
 import { Posts } from '../components/Posts'
 import { SEO } from '../components/SEO'
 import { getSimplifiedPosts } from '../utils/helpers'
+import useIsClient from '../utils/hooks/use-is-client'
 import config from '../utils/config'
 
 import github from '../assets/nav-github.png'
@@ -22,6 +23,7 @@ const WebsiteIndex = ({ data }) => {
   const [followers, setFollowers] = useState(0)
   const latest = data.latest.edges
   const simplifiedLatest = useMemo(() => getSimplifiedPosts(latest), [latest])
+  const isClient = useIsClient();
 
   useEffect(() => {
     async function getGithubAPI() {
@@ -33,6 +35,8 @@ const WebsiteIndex = ({ data }) => {
       setFollowers(data.followers)
     })
   }, [])
+
+  if ( !isClient ) return null;
 
   return (
     <article className='hero'>
