@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "gatsby": "^5.9.0",
+    "gatsby-plugin-cookiehub-banner": "^0.1.0",
     "gatsby-plugin-feed": "^5.9.0",
     "gatsby-plugin-google-gtag": "^5.10.0",
     "gatsby-plugin-google-tagmanager": "^5.9.0",
