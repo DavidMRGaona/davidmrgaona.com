@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 
+import useIsClient from '../utils/hooks/use-is-client'
 import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
 import config from '../utils/config'
@@ -17,6 +18,7 @@ const projectsList = [
 
 const ProjectsIndex = () => {
   const [repos, setRepos] = useState([])
+  const isClient = useIsClient()
 
   useEffect(() => {
     async function getStars() {
@@ -34,14 +36,16 @@ const ProjectsIndex = () => {
       .catch((err) => console.log(err))
   }, [])
 
+  if (!isClient) return null
+
   return (
     <article>
       <header>
         <div className='container'>
           <h1>Projects</h1>
           <p className='description'>
-            Algunos de mis proyectos destacados de código abierto. Míralos todos{' '} <a
-            href='https://github.com/davidmrgaona'>en GitHub</a>.
+            Algunos de mis proyectos destacados de código abierto. Míralos todos{' '}
+            <a href='https://github.com/davidmrgaona'>en GitHub</a>.
           </p>
         </div>
       </header>
