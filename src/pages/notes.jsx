@@ -37,7 +37,7 @@ export default NoteIndex
 
 export const Head = () => (
   <SEO
-    title={config.siteTitle}
+    title={`Notes | ${config.siteTitle}`}
     customDescription='Notes, musings, and whatever else I want to write.'
   />
 )

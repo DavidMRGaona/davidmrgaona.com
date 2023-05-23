@@ -6,8 +6,8 @@ import { SEO } from '../components/SEO'
 import config from '../utils/config'
 
 const NoteTemplate = ({ data }) => {
-  const post = data.markdownRemark
-  const { title, slug, date } = post.frontmatter
+  const note = data.markdownRemark
+  const { title, slug, date } = note.frontmatter
 
   return (
     <article id={slug}>
@@ -17,18 +17,16 @@ const NoteTemplate = ({ data }) => {
             <Link to='/notes'>Back to Notes</Link>
           </p>
           <h1>{title}</h1>
-          <p>
-            <div className='post-details'>
-              Written by <Link to='/me'>David M. Ramos Gaona</Link> on{' '}
-              <time>{date}</time>
-            </div>
-          </p>
+          <div className='post-details'>
+            Written by <Link to='/me'>David M. Ramos Gaona</Link> on{' '}
+            <time>{date}</time>
+          </div>
         </div>
       </header>
 
       <section
         className='container'
-        dangerouslySetInnerHTML={{ __html: post.html }}
+        dangerouslySetInnerHTML={{ __html: note.html }}
       />
 
       <section>
@@ -51,11 +49,12 @@ NoteTemplate.Layout = Layout
 
 export default NoteTemplate
 
-export const Head = ({ pageContext }) => {
-  const { title } = pageContext
+export const Head = ({ data }) => {
+  const note = data.markdownRemark
   return (
-    <SEO title={`${title} | ${config.siteTitle}`} />
-
+    <SEO
+      title={`${note.frontmatter.title} | ${config.siteTitle}`}
+    />
   )
 }
 

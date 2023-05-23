@@ -3,7 +3,7 @@ import React from 'react'
 import config from '../utils/config'
 import { useSiteMetadata } from '../utils/hooks/use-site-metadata'
 
-export const SEO = ({ title, description, pathname, children, postNode, postPath, postSEO, customDescription }) => {
+export const SEO = ({ title, description, postNode, postPath, postSEO }) => {
   let { title: defaultTitle, description: defaultDescription, siteUrl } = useSiteMetadata()
   let image = config.siteLogo
 
@@ -18,7 +18,7 @@ export const SEO = ({ title, description, pathname, children, postNode, postPath
 
     siteUrl = `${config.siteUrl}${postPath}` || siteUrl
   } else {
-    title = config.siteTitle || defaultTitle
+    title = title || defaultTitle
     description = description || defaultDescription
   }
 
