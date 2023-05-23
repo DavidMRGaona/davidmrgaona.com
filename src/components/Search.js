@@ -35,7 +35,7 @@ export const Search = ({data}) => {
           id="search"
           type="search"
           className="search-input"
-          placeholder="Begin typing to search..."
+          placeholder="Comienza a escribir para buscar..."
           value={query}
           onChange={(e) => {
             navigate(e.target.value ? `/blog/?search=${e.target.value}` : '')
@@ -45,7 +45,7 @@ export const Search = ({data}) => {
         <img
           className="search-icon"
           src={searchIcon}
-          alt="Search"
+          alt="Buscar"
           onClick={() => searchRef.current.focus()}
         />
       </div>
@@ -55,7 +55,7 @@ export const Search = ({data}) => {
             <Posts data={results} showYears query={query}/>
           ) : (
             <p style={{marginTop: '2rem'}}>
-              Sorry, nothing matched that search.
+              Lo lamento, nada coincide con la búsqueda.
             </p>
           )
         ) : (

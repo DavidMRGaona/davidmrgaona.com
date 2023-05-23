@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 import { Hamburger } from '../assets/Hamburger'
 import { Colors } from './Colors'
 import moon from '../assets/moon.png'
+import sun from '../assets/sun.png'
 
 export const FileHeader = ({setCollapsed, onUpdateTheme, theme}) => {
   const location = useLocation()
@@ -28,7 +29,7 @@ export const FileHeader = ({setCollapsed, onUpdateTheme, theme}) => {
         <Colors/>
         <button onClick={onUpdateTheme} className="theme-switcher">
           <span>{theme === 'dark' ? 'Dark' : 'Light'}</span>
-          <img src={moon} alt="Theme"/>
+          <img src={theme === 'dark' ? moon : sun} alt="Theme"/>
         </button>
       </div>
     </header>

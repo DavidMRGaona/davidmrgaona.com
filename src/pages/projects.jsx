@@ -10,7 +10,7 @@ const projectsList = [
   {
     name: 'davidmrgaona.com',
     slug: 'davidmrgaona.com',
-    tagline: 'The source of this website.',
+    tagline: 'El origen de esta web.',
     url: 'https://davidmrgaona.com',
   },
 ]
@@ -40,8 +40,8 @@ const ProjectsIndex = () => {
         <div className='container'>
           <h1>Projects</h1>
           <p className='description'>
-            A few highlights of my open-source projects. View them all{' '}
-            <a href='https://github.com/davidmrgaona'>on GitHub</a>.
+            Algunos de mis proyectos destacados de código abierto. Míralos todos{' '} <a
+            href='https://github.com/davidmrgaona'>en GitHub</a>.
           </p>
         </div>
       </header>
@@ -51,13 +51,13 @@ const ProjectsIndex = () => {
           <div className='project' key={project.name}>
             <h2>{project.name}</h2>
             <div className='links tags'>
-              {project.writeup && <Link to={project.writeup}>Write-up</Link>}
+              {project.writeup && <Link to={project.writeup}>Escríbeme</Link>}
               <a
                 href={`https://github.com/davidmrgaona/${project.slug}`}
                 target='_blank'
                 rel='noreferrer'
               >
-                Source
+                Código
               </a>
               {project.url && (
                 <a href={project.url} target='_blank' rel='noreferrer'>
@@ -96,5 +96,5 @@ ProjectsIndex.Layout = Layout
 export default ProjectsIndex
 
 export const Head = () => (
-  <SEO title={`Projects | ${config.siteTitle}`} />
+  <SEO title={`Proyectos | ${config.siteTitle}`} />
 )

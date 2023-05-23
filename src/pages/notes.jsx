@@ -17,7 +17,7 @@ const NoteIndex = ({ data }) => {
         <div className='container'>
           <h1>Notes</h1>
           <p className='description'>
-            Notes, musings, and whatever else I want to write.
+            Notas, reflexiones y cualquier otra cosa que quiera escribir.
           </p>
         </div>
       </header>
@@ -38,7 +38,7 @@ export default NoteIndex
 export const Head = () => (
   <SEO
     title={`Notes | ${config.siteTitle}`}
-    customDescription='Notes, musings, and whatever else I want to write.'
+    customDescription='Notas, reflexiones y cualquier otra cosa que quiera escribir.'
   />
 )
 

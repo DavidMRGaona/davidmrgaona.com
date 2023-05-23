@@ -14,11 +14,11 @@ const NoteTemplate = ({ data }) => {
       <header>
         <div className='container' style={{ paddingBottom: 0 }}>
           <p>
-            <Link to='/notes'>Back to Notes</Link>
+            <Link to='/notes'>Volver a las Notas</Link>
           </p>
           <h1>{title}</h1>
           <div className='post-details'>
-            Written by <Link to='/me'>David M. Ramos Gaona</Link> on{' '}
+            Escrito por <Link to='/me'>David M. Ramos Gaona</Link> el{' '}
             <time>{date}</time>
           </div>
         </div>
@@ -33,11 +33,11 @@ const NoteTemplate = ({ data }) => {
         <div className='container'>
           <div className='divider' />
           <p>
-            Comments? Feel free to{' '}
-            <a href='mailto:hello[at]davidmrgaona[dot]com'>email me</a>.
+            ¿Algún comentario? Siéntete libre de {' '}
+            <a href='mailto:hello[at]davidmrgaona[dot]com'>escribirme</a>.
           </p>
           <p>
-            <Link to='/notes'>Back to Notes</Link>
+            <Link to='/notes'>Volver a las Notas</Link>
           </p>
         </div>
       </section>

@@ -49,7 +49,7 @@ export const Post = ({node, query, prefix}) => {
       className={isNew ? 'post new' : 'post'}
     >
       <span>
-        <span className="new-badge">{isNew && 'New!'}</span>
+        <span className="new-badge">{isNew && '¡Nuevo!'}</span>
         {getTitle(node.title, query)}
       </span>
       <div>{formattedDate && <time>{formattedDate}</time>}</div>

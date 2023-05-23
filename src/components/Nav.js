@@ -9,9 +9,9 @@ import twitter from '../assets/nav-twitter.png'
 import linkedin from '../assets/nav-linkedin.png'
 
 const mainNavItems = [
-  {url: '/blog', icon: blog, label: 'Articles'},
-  {url: '/projects', icon: projects, label: 'Projects'},
-  {url: '/me', icon: floppy, label: 'About me'},
+  {url: '/blog', icon: blog, label: 'Artículos'},
+  {url: '/projects', icon: projects, label: 'Proyectos'},
+  {url: '/me', icon: floppy, label: 'Sobre mí'},
 ]
 
 const socialNavItems = [

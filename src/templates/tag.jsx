@@ -20,7 +20,7 @@ const TagTemplate = ({ data, pageContext }) => {
         <header>
           <div className='container'>
             <h1>
-              <span className='deemphasized'>Posts tagged:</span>{' '}
+              <span className='deemphasized'>Posts etiquetados:</span>{' '}
               <span className='primary-underline'>{tag}</span>
             </h1>
             <p className='description'>

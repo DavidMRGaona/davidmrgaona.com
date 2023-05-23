@@ -15,11 +15,10 @@ const BlogIndex = ({ data }) => {
     <article className='blog-page'>
       <header>
         <div className='container'>
-          <h1>Articles</h1>
+          <h1>Artículos</h1>
           <p className='description'>
-            Tutorials, technical articles, snippets, reference materials, and
-            all development-related resources I've written. See{' '}
-            <Link to='/notes'>Notes</Link> for everything else.
+            Tutoriales, artículos técnicos, snippets, materiales de referencia y todos los recursos relacionados con el
+            desarrollo que he escrito. Mira{' '} <Link to='/notes'>Notas</Link> para todo lo demás.
           </p>
         </div>
       </header>
@@ -39,9 +38,8 @@ export default BlogIndex
 
 export const Head = () => (
   <SEO
-    title={`Articles | ${config.siteTitle}`}
-    customDescription="Tutorials, technical articles, snippets, reference materials, and all
-              development-related resources I've written."
+    title={`Artículos | ${config.siteTitle}`}
+    customDescription='Tutoriales, artículos técnicos, snippets, materiales de referencia y todos los recursos relacionados con el desarrollo que he escrito.'
   />
 )
 

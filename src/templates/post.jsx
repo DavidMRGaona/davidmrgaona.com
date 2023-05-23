@@ -37,7 +37,7 @@ const PostTemplate = ({data}) => {
                 </div>
               )}
               <div className="post-details">
-                Written by <Link to="/me">David M. Ramos Gaona</Link> on{' '}
+                Escrito por <Link to="/me">David M. Ramos Gaona</Link> el{' '}
                 <time>{date}</time>
               </div>
             </div>

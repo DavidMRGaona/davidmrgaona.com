@@ -11,7 +11,7 @@ const NotFoundPage = () => {
       <header>
         <div className='container'>
           <h1>404</h1>
-          <p className='description'>This was probably a mistake.</p>
+          <p className='description'>Esto probablemente sea un error.</p>
         </div>
       </header>
 

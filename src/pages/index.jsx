@@ -12,10 +12,14 @@ import github from '../assets/nav-github.png'
 
 const madeWithLinks = [
   { url: '/', label: 'Home', description: 'Home' },
-  { url: '/blog', label: 'Articles', description: 'Tutorials, technical articles, snippets, and reference materials' },
-  { url: '/notes', label: 'Notes', description: 'Anything else I want to write.' },
-  { url: '/projects', label: 'Projects', description: 'A few highlights of my open-source projects.' },
-  { url: '/me', label: 'About me', description: 'A little about me and links to talks, interviews, etc.' },
+  {
+    url: '/blog',
+    label: 'Artículos',
+    description: 'Tutoriales, artículos técnicos, snippets y materiales de referencia.',
+  },
+  { url: '/notes', label: 'Notas', description: 'Cualquier otra cosa que quiera escribir' },
+  { url: '/projects', label: 'Proyectos', description: 'Algunos de mis proyectos destacados de código abierto' },
+  { url: '/me', label: 'Sobre mí', description: 'Un poco sobre mí, enlaces para conectar, entrevistas, etc.' },
   // {url: '/resume', label: 'Resume', description: 'My professional experience.'},
 ]
 
@@ -23,7 +27,7 @@ const WebsiteIndex = ({ data }) => {
   const [followers, setFollowers] = useState(0)
   const latest = data.latest.edges
   const simplifiedLatest = useMemo(() => getSimplifiedPosts(latest), [latest])
-  const isClient = useIsClient();
+  const isClient = useIsClient()
 
   useEffect(() => {
     async function getGithubAPI() {
@@ -36,37 +40,33 @@ const WebsiteIndex = ({ data }) => {
     })
   }, [])
 
-  if ( !isClient ) return null;
+  if (!isClient) return null
 
   return (
     <article className='hero'>
       <header>
         <div className='container'>
-          <h1>Hey, I'm David.</h1>
+          <h1>Ey, soy David.</h1>
           <p className='subtitle small'>
-            I'm a <strong>web developer</strong> in{' '}
-            <strong>Toledo</strong>. I love sharing{' '}
-            <Link to='/blog'>my knowledge</Link>. This website is my little
-            space — a compendium of the things I've learned and created over
-            the years.
+            Soy <strong>desarrollador web</strong> en{' '} <strong>Toledo</strong>. Me encanta compartir{' '} <Link
+            to='/blog'>mi conocimiento</Link>. Esta web es mi pequeño espacio — un compendio de cosas que he ido
+            aprendiendo a lo largo de los años.
           </p>
           <p className='hero-buttons'>
-            {followers && (
-              <a
-                href='https://github.com/davidmrgaona'
-                className='button icon-button'
+            <a
+              href='https://github.com/davidmrgaona'
+              className='button icon-button'
               >
-                <img src={github} alt='GitHub' />
-                {Number(followers).toLocaleString()} GitHub followers
-              </a>
-            )}
+              <img src={github} alt='GitHub' />
+              {Number(followers).toLocaleString()} Seguidores en Github
+            </a>
           </p>
         </div>
       </header>
 
       <div className='container'>
         <h2 className='flex-header'>
-          <span>Latest Articles</span> <Link to='/blog'>View All</Link>
+          <span>Últimos artículos</span> <Link to='/blog'>Ver todos</Link>
         </h2>
         <Posts data={simplifiedLatest} />
 
@@ -79,15 +79,13 @@ const WebsiteIndex = ({ data }) => {
             </li>
           ))}
           <li>
-            <strong>Links</strong>
+            <strong>Enlaces</strong>
             <ul>
               <li>
-                <a href='https://github.com/davidmrgaona'>GitHub</a> - Open
-                source projects
+                <a href='https://github.com/davidmrgaona'>GitHub</a> - Proyectos de código abierto
               </li>
               <li>
-                <a href='https://twitter.com/davidmrgaona'>Twitter</a> - Random
-                thoughts
+                <a href='https://twitter.com/davidmrgaona'>Twitter</a> - Pensamientos aleatorios
               </li>
               <li>
                 <a

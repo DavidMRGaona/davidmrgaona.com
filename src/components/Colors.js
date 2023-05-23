@@ -7,9 +7,9 @@ const green = '#74CF74'
 
 const colors = [
   {name: 'Indigo', color: indigo},
-  {name: 'Yellow', color: yellow},
-  {name: 'Red', color: red},
-  {name: 'Green', color: green},
+  {name: 'Amarillo', color: yellow},
+  {name: 'Rojo', color: red},
+  {name: 'Verde', color: green},
 ]
 
 function useOutsideAlerter (ref, setDropdownOpen) {

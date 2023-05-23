@@ -19,7 +19,7 @@ export const Footer = () => {
     <footer className="footer">
       <section>
         <nav>
-          <span className="desktop-only">Made by David M. Ramos</span>
+          <span className="desktop-only">Hecho por David M. Ramos</span>
           {links.map((link) => (
             <a
               href={link.url}
