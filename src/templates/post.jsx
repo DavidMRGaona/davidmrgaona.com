@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react'
 import { graphql, Link } from 'gatsby'
 
+import { appendComments, slugify } from '../utils/helpers'
+import useIsClient from '../utils/hooks/use-is-client'
+import { Comments } from '../components/Comments'
 import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
-import { Comments } from '../components/Comments'
 import config from '../utils/config'
-import { appendComments, slugify } from '../utils/helpers'
 
 const PostTemplate = ({data}) => {
   const post = data.markdownRemark
   const {tags, title, description, date} = post.frontmatter
   const commentBox = React.createRef()
+  const isClient = useIsClient()
 
   useEffect(() => {
     appendComments(commentBox)
   }, [commentBox])
+
+  if (!isClient) return null
 
   return (
     <>

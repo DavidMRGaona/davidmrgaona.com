@@ -1,8 +1,12 @@
 const { resolveSiteUrl } = require('gatsby-plugin-sitemap/internals')
-require("dotenv").config({
- path: `.env.${process.env.NODE_ENV}`,
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
 })
+
 module.exports = {
+  flags: {
+    DEV_SSR: false, // set to true to force Gatsby to do SSR during dev (e.g. for debugging hydration issues)
+  },
   siteMetadata: {
     title: 'David M. Ramos Gaona\'s personal website ',
     description: 'This is my little space.',
@@ -78,15 +82,15 @@ module.exports = {
       },
     },
     {
-        resolve: `gatsby-plugin-cookiehub-banner`,
-        options: {
-            // The ID is part of the CookieHub URL: https://cookiehub.net/cc/YOUR_COOKIEHUB_ID.js
-            cookieHubId: process.env.COOKIEHUB_BANNER_ID,
-            // Optional parameter (default false) - Use new v2 API.
-            cookieHubV2Api: true,
-            // Categories configured with CookieHub
-            categories: []
-        }
+      resolve: `gatsby-plugin-cookiehub-banner`,
+      options: {
+        // The ID is part of the CookieHub URL: https://cookiehub.net/cc/YOUR_COOKIEHUB_ID.js
+        cookieHubId: process.env.COOKIEHUB_BANNER_ID,
+        // Optional parameter (default false) - Use new v2 API.
+        cookieHubV2Api: true,
+        // Categories configured with CookieHub
+        categories: [],
+      },
     },
     {
       resolve: 'gatsby-plugin-sitemap',
