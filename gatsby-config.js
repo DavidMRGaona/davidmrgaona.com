@@ -85,16 +85,7 @@ module.exports = {
             // Optional parameter (default false) - Use new v2 API.
             cookieHubV2Api: true,
             // Categories configured with CookieHub
-            categories: [
-            {
-                categoryName: 'analytics', // Unique id of the category which is set by Cookiehub.
-                cookieName: '_ga_*' // Your custom cookie name
-            },
-            {
-                categoryName: 'analytics',
-                cookieName: '_ga_'
-            }
-            ]
+            categories: []
         }
     },
     {
