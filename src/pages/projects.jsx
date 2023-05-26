@@ -14,6 +14,11 @@ const projectsList = [
     tagline: 'El origen de esta web.',
     url: 'https://davidmrgaona.com',
   },
+  {
+    name: 'Mi blockchain',
+    slug: 'my-blockchain',
+    tagline: 'POC de una blockchain en Python.',
+  }
 ]
 
 const ProjectsIndex = () => {
